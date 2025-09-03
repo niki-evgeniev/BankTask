@@ -20,11 +20,11 @@ public class UserController {
 
     @PostMapping("register")
     ResponseEntity<?> getRegisterInfo(@Valid @RequestBody RegisterUserDTO registerUserDTO) {
-        System.out.println();
-        long id = 2L;
+
+        boolean isRegisterNewUSer = userService.registerUser(registerUserDTO);
 
         return ResponseEntity
-                .created(URI.create("/api/users/" + id))
+                .created(URI.create("/api/users/"))
                 .build();
     }
 }
