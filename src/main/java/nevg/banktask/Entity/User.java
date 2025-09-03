@@ -1,12 +1,11 @@
 package nevg.banktask.Entity;
 
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Table
 @Entity(name = "users")
@@ -21,6 +20,13 @@ public class User extends BaseEntity {
     @CreationTimestamp
     @Column(name = "create_on_date", columnDefinition = "DATETIME(0)", nullable = false)
     private LocalDateTime createOn;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "users_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private List<UserRole> roles;
 
     public User() {
     }
